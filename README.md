@@ -25,4 +25,17 @@ It requires the `codex` CLI to be available on your `PATH`.
 Codex opens in a right-hand split rooted at the current project. Use `:CodexHealth`
 to diagnose the integration.
 
+## Claude Code
+
+This configuration includes [claudecode.nvim](https://github.com/coder/claudecode.nvim).
+Install the `claude` CLI and authenticate it before using the integration.
+
+- `<Space>lc` — toggle Claude Code
+- `<Space>lf` — focus Claude Code
+- `<Space>lb` — add the current buffer as context
+- Visual `<Space>ls` — send the selection to Claude Code
+
+Claude Code uses Neovim's native terminal and can open proposed edits as native
+diffs. Run `:checkhealth claudecode` if the CLI is not detected.
+
 
