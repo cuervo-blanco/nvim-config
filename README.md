@@ -14,6 +14,14 @@ nvim
 
 Lazy.nvim installs the configured plugins on first launch.
 
+## Explorer and Git status
+
+Neo-tree is the file Explorer. It displays Git state beside each filename and
+automatically refreshes as files change.
+
+- `<Space>e` (or `<Space>pv`) — toggle the project Explorer
+- `<Space>ge` — show only files with Git changes not yet committed
+
 ## Codex
 
 This configuration includes [codex.nvim](https://github.com/nwiizo/codex.nvim).

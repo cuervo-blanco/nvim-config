@@ -24,7 +24,7 @@ return {
                 component_separators = "",
                 section_separators = "",
                 disabled_filetypes = {
-                    statusline = { "NvimTree", "vista", "dbui", "packer", "qf", "help" },
+                    statusline = { "NvimTree", "neo-tree", "vista", "dbui", "packer", "qf", "help" },
                 },
             },
             sections = {
