@@ -2,6 +2,9 @@
 
 Personal Neovim configuration for C++, Python, and general development.
 
+Requires Neovim 0.12 or newer. The Tree-sitter setup uses its Neovim 0.12
+compatibility branch and installs parsers automatically on first launch.
+
 ## Install
 
 ```sh

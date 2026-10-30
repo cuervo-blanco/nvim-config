@@ -1,27 +1,38 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        -- `master` is archived for Neovim 0.11. Neovim 0.12 requires the
+        -- rewritten `main` branch; mixing the two causes nil-node crashes
+        -- such as "attempt to call method 'range'" in injected languages.
+        branch = "main",
+        lazy = false,
         build = ":TSUpdate",
         config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "vimdoc", "javascript", "typescript", "c", "lua", "rust",
-                    "jsdoc", "bash", "cpp", "cmake", "python", "query",
-                },
+            local treesitter = require("nvim-treesitter")
 
-                sync_install = false,
+            treesitter.setup({
+                install_dir = vim.fn.stdpath("data") .. "/site",
+            })
 
-                auto_install = true,
+            treesitter.install({
+                "bash", "c", "cmake", "cpp", "css", "html", "javascript",
+                "jsdoc", "json", "lua", "markdown", "markdown_inline", "python",
+                "query", "rust", "toml", "typescript", "vim", "vimdoc", "yaml",
+            })
 
-                indent = {
-                    enable = true
-                },
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function(args)
+                    -- Tree-sitter highlighting belongs to Neovim 0.12 itself.
+                    -- A missing parser should not prevent a buffer from opening.
+                    pcall(vim.treesitter.start, args.buf)
+                end,
+            })
 
-                highlight = {
-                    enable = true,
-
-                    additional_vim_regex_highlighting = { "markdown" },
-                },
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = { "c", "cpp", "lua", "python", "rust" },
+                callback = function(args)
+                    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
             })
         end,
     },
